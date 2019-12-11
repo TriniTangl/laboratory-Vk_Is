@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        
+        .wrapper {
+            margin: 0;
+            padding: 0;
+            border: 5px solid #303030;
+            background-color: #ede8e8;
+        }
+        
+        .menu > div {
+            display: inline-block;
+            padding: 3px 5px;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 14px;
+        }
+        
+        textarea {
+            display: block;
+            width: 90%;
+            height: 700px;
+            margin: 0;
+            padding: 2px 1px;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            line-height: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="menu">
+        <div>File</div>
+        <div>Edit</div>
+        <div>View</div>
+        <div>Search</div>
+        <div>Terminal</div>
+        <div>Help</div>
+    </div>
+    <textarea cols="30" id="" name="" rows="10">
+    
+    </textarea>
+</div>
+</body>
+</html>
+
+<!-- Puc. 1 -->
+<!--
+[vladyslav_havryliuk@localhost ~]$ hbase shell
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+version 2.2.2-cdh3u2, r, Wed Oct 25 17:32:26 POT 2019
+
+hbase(main):001:0> create 'wine', 'vi';
+0 row(s) in 1.9730 seconds
+
+hbase(main):002:0>
+-->
+
+<!-- Puc. 2 -->
+<!--
+[vladyslav_havryliuk@localhost ~]$ hbase shell
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+version 2.2.2-cdh3u2, r, Wed Oct 25 17:32:26 POT 2019
+
+hbase(main):001:0> create 'wine', 'vi';
+0 row(s) in 1.9730 seconds
+
+hbase(main):002:0> put 'wine', 'row1', 'vi:shop', 'Fantastic wine'
+0 row(s) in 0.4150 seconds
+
+hbase(main):003:0> put 'wine', 'row1', 'vi:type', 'Violet'
+0 row(s) in 0.0530 seconds
+
+hbase(main):004:0> put 'wine', 'row1', 'vi:year', '2009'
+0 row(s) in 0.6246 seconds
+
+hbase(main):005:0> scan 'wine'
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:shop, timestamp=1401595198972, value=Fantastic wine
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row1                                  column=vi:year, timestamp=1461598737397, value=2009
+1 row(s) in 0.6496 seconds
+
+hbase(main):006:0>
+-->
+
+<!-- Puc. 3 -->
+<!--
+hbase(main):005:0> scan 'wine'
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:shop, timestamp=1401595198972, value=Fantastic wine
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row1                                  column=vi:year, timestamp=1461598737397, value=2009
+1 row(s) in 0.6496 seconds
+
+hbase(main):006:0> put 'wine', 'row2', 'vi:shop', 'Chippolino'
+0 row(s) in 0.7868 seconds
+
+hbase(main):007:0> put 'wine', 'row2', 'vi:type', 'Merenyt'
+0 row(s) in 0.7343 seconds
+
+hbase(main):008:6> put 'wine', 'row2', 'vi:year', '2015'
+0 row(s) in 0.9343 seconds
+
+hbase(main):009:0> scan 'wine'
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:shop, timestamp=1401595198972, value=Fantastic wine
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row1                                  column=vi:year, timestamp=1461598737397, value=2009
+ row2                                  column=vi:shop, timestamp=1461595264779, value=Chippolino
+ row2                                  column=vi:type, timestamp=1461595211587, value=Merenyt
+ row2                                  column=vi:year, timestamp=1461598737397, value=2015
+2 row(s) in 0.9820 seconds
+
+hbase(main):009:0>
+-->
+
+<!-- Puc. 4 -->
+<!--
+
+hbase(main):006:0> put 'wine', 'row2', 'vi:shop', 'Chippolino'
+0 row(s) in 0.7868 seconds
+
+hbase(main):007:0> put 'wine', 'row2', 'vi:type', 'Merenyt'
+0 row(s) in 0.7343 seconds
+
+hbase(main):008:6> put 'wine', 'row2', 'vi:year', '2015'
+0 row(s) in 0.9343 seconds
+
+hbase(main):009:0> scan 'wine'
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:shop, timestamp=1401595198972, value=Fantastic wine
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row1                                  column=vi:year, timestamp=1461598737397, value=2009
+ row2                                  column=vi:shop, timestamp=1461595264779, value=Chippolino
+ row2                                  column=vi:type, timestamp=1461595211587, value=Merenyt
+ row2                                  column=vi:year, timestamp=1461598737397, value=2015
+2 row(s) in 0.9820 seconds
+
+hbase(main):010:0> scan 'wine', {COLUMN => ['vi:type']}
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row2                                  column=vi:type, timestamp=1461595211587, value=Merenyt
+2 row(s) in 0.0658 seconds
+
+hbase(main):011:0>
+-->
+
+<!-- Puc. 5 -->
+<!--
+
+hbase(main):010:0> scan 'wine', {COLUMN => ['vi:type']}
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+ row2                                  column=vi:type, timestamp=1461595211587, value=Merenyt
+2 row(s) in 0.0658 seconds
+
+hbase(main):011:0> scan 'wine', {COLUMN => ['vi:type'], LIMIT => 1}
+ROW                                    COLUMN+CELL
+ row1                                  column=vi:type, timestamp=1461595211587, value=Violet
+1 row(s) in 0.0558 seconds
+
+hbase(main):012:0> describe 'wine'
+DESCRIPTION                                                                         ENABLED
+ {NAME => 'wine', FAMILIES => [{NAME => 'vi', BLOOMFILTER => 'NONE', REPLICATION SCOPE => '0', COMPRESSION = true
+ > 'NONE', VERSIONS => '3', TTL => '2147483647', BLOCKSIZE => '65536', IN_MEMORY => 'false', BLOCKCACHE =>
+ 'true'}]}
+1 row(s) in 0.1318 seconds
+
+hbase(main):013:0> get 'wine', 'row1'
+COLUMN                                 CELL
+ vi:shop                               timestamp=1401595198972, value=Fantastic wine
+ vi:type                               timestamp=1461595211587, value=Violet
+ vi:year                               timestamp=1461598737397, value=2009
+3 row(s) in 0.3205 seconds
+
+hbase(main):014:0>
+-->
+
+<!-- Puc. 6 -->
+<!--
+
+hbase(main):013:0> get 'wine', 'row1'
+COLUMN                                 CELL
+ vi:shop                               timestamp=1401595198972, value=Fantastic wine
+ vi:type                               timestamp=1461595211587, value=Violet
+ vi:year                               timestamp=1461598737397, value=2009
+3 row(s) in 0.3205 seconds
+
+hbase(main):014:0> get 'wine', 'row2' {COLUMN => ['vi:shop', 'vi:type', 'vi:year']}
+COLUMN                                 CELL
+ vi:shop                               timestamp=1461595264779, value=Chippolino
+ vi:type                               timestamp=1461595211587, value=Merenyt
+ vi:year                               timestamp=1461598737397, value=2015
+3 row(s) in 0.1213 seconds
+
+hbase(main):015:0> delete 'wine', 'row2', 'vi:type'
+0 row(s) in 0.0321 seconds
+
+hbase(main):016:0> get 'wine', 'row2'
+COLUMN                                 CELL
+ vi:shop                               timestamp=1461595264779, value=Chippolino
+ vi:year                               timestamp=1461598737397, value=2015
+2 row(s) in 0.1213 seconds
+
+hbase(main):017:0>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
