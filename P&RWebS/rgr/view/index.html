@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>RGR</title>
+    <style>
+        *,
+        html,
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font: 16px Arial, sans-serif;
+        }
+        
+        body {
+            width: 100%;
+            padding: 15px;
+        }
+        
+        fieldset {
+            padding: 10px;
+        }
+        
+        legend {
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            display: block;
+            width: 350px;
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            border: 1px solid #c8c8c8;
+        }
+        
+        input.invalid {
+            border-color: #de1414;
+        }
+        
+        input + small {
+            display: none;
+            font-size: 12px;
+            color: #de1414;
+        }
+        
+        button {
+            margin-top: 10px;
+            display: block;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        textarea {
+            display: block;
+            width: 100%;
+            height: 700px;
+            padding: 3px;
+            font: 12px Consolas;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend>Remote command prompt</legend>
+        <label for="input-command">Please enter the command</label>
+        <input id="input-command" required type="text">
+        <small>Please enter the correct command!</small>
+        <button id="send" type="submit">Send command</button>
+    </fieldset>
+    <fieldset>
+        <legend>Result</legend>
+        <textarea id="output" readonly>@command: </textarea>
+    </fieldset>
+</form>
+<script src="js/axios.min.js"></script>
+<script>
+    const commandInput = document.getElementById('input-command');
+    const outputArea = document.getElementById('output');
+    const sendButton = document.getElementById('send');
+    
+    window.onload = () => {
+        sendButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            
+            const cmd = commandInput.value;
+            
+            if (cmd) {
+                commandInput.classList.remove('invalid');
+                commandInput.nextElementSibling.style.display = 'none';
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:3000/rgr/',
+                    data: {
+                        command: cmd
+                    }
+                }).then(response => {
+                    console.log(response);
+                    if (!response.data.error || response.data.result) {
+                        outputArea.value = outputArea.value
+                            + cmd + '\n' + response.data.result
+                            + '\n\n@command: ';
+                    } else {
+                        outputArea.value = outputArea.value
+                            + cmd + '\n\'' + cmd + '\' is not recognized as an internal or external command,'
+                            + '\noperable program or batch file.\n\n@command: ';
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    alert(`${error.response.status}\n${error.response.data.message}`);
+                });
+            } else {
+                commandInput.classList.add('invalid');
+                commandInput.nextElementSibling.style.display = 'block';
+            }
+        });
+    }
+</script>
+</body>
+</html>
