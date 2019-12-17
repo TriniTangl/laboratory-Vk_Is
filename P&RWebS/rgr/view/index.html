@@ -54,12 +54,13 @@
         }
         
         button {
-            margin-top: 10px;
             display: block;
+            width: auto;
+            margin-top: 10px;
             padding: 5px 10px;
             cursor: pointer;
         }
-        
+
         textarea {
             display: block;
             width: 100%;
@@ -67,6 +68,16 @@
             padding: 3px;
             font: 12px Consolas;
             resize: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            input {
+                width: 100%;
+            }
+    
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -81,7 +92,7 @@
     </fieldset>
     <fieldset>
         <legend>Result</legend>
-        <textarea id="output" readonly>@command: </textarea>
+        <textarea id="output" readonly></textarea>
     </fieldset>
 </form>
 <script src="js/axios.min.js"></script>
@@ -91,11 +102,25 @@
     const sendButton = document.getElementById('send');
     
     window.onload = () => {
+        axios({
+            method: 'post',
+            url: 'http://localhost:3000/rgr/',
+            data: {
+                command: 'cd'
+            }
+        }).then(response => {
+            if (!response.data.error || response.data.dir) {
+                outputArea.value = `${response.data.dir.replace(/(\r\n|\n|\r)/gm, '')}>`;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    
         sendButton.addEventListener('click', (event) => {
             event.preventDefault();
-            
+        
             const cmd = commandInput.value;
-            
+        
             if (cmd) {
                 commandInput.classList.remove('invalid');
                 commandInput.nextElementSibling.style.display = 'none';
@@ -106,19 +131,19 @@
                         command: cmd
                     }
                 }).then(response => {
-                    console.log(response);
+                    response.data.dir = response.data.dir.replace(/(\r\n|\n|\r)/gm, '');
                     if (!response.data.error || response.data.result) {
                         outputArea.value = outputArea.value
                             + cmd + '\n' + response.data.result
-                            + '\n\n@command: ';
+                            + '\n' + response.data.dir + '>';
                     } else {
                         outputArea.value = outputArea.value
                             + cmd + '\n\'' + cmd + '\' is not recognized as an internal or external command,'
-                            + '\noperable program or batch file.\n\n@command: ';
+                            + '\noperable program or batch file.\n\n' + response.data.dir + '>';
                     }
+                    commandInput.value = '';
                 }).catch(error => {
                     console.log(error);
-                    alert(`${error.response.status}\n${error.response.data.message}`);
                 });
             } else {
                 commandInput.classList.add('invalid');

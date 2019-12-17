@@ -4,8 +4,10 @@
     "description": "",
     "main": "dist/app.js",
     "scripts": {
-        "start": "tsc && nodemon dist/app.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "nodemon -e ts --exec \"npm run compile\"",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "compile": "tsc && node dist/app.js",
+        "dev": "nodemon tsc app.ts"
     },
     "keywords": [],
     "author": "",
@@ -16,6 +18,7 @@
     },
     "dependencies": {
         "express": "^4.17.1",
-        "node-cmd": "^3.0.0"
+        "node-cmd": "^3.0.0",
+        "shelljs": "^0.8.3"
     }
 }
