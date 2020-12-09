@@ -1,3 +1,0 @@
-java -cp . HttpServer
-
-javac HttpServer.java
