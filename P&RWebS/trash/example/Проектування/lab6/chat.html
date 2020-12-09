@@ -1,0 +1,50 @@
+<html>
+<header>
+    <title>Chat</title>
+    <style>
+        
+    </style>
+</header>
+
+<body>
+    <div>
+    <input type="name" placeholder="name" id="n" size="40"><br>
+    <textarea id="area"></textarea><br>
+    <input type="name" id="m" size="40"><br>
+        <button onclick="btnClick()" id="btn9">-</button>
+    </div>
+<script>
+   n = document.getElementById('n');
+   m = document.getElementById('m');
+   last = "";
+   area = document.getElementById('area');
+   var xhr = new XMLHttpRequest();
+   setInterval(() => {
+    xhr.open('GET','http://localhost:5000/Chat/last/', false);
+    xhr.send();
+    console.log(xhr.responseText);
+    if(xhr.responseText != last){
+        last = xhr.responseText;
+        area.value = area.value+ "\n" + last;
+    }
+        }, 500);
+    function btnClick(number) {
+        xhr.open('GET','http://localhost:5000/Chat/send/'+n.value+'/'+m.value, false);
+        
+        xhr.send();
+        if (xhr.status == 200) {
+            if (xhr.responseText == 'ok'){
+                area.value = area.value+ "\n" + m.value;
+                m.value = "";
+                
+            }
+            else{
+                console.log("error"+xhr.responseText)
+            }
+        }
+        
+    }
+    
+</script>
+</body>
+</html>
