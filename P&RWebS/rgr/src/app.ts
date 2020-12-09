@@ -1,5 +1,5 @@
-import nodeCmd from 'node-cmd';
 import express, {Express} from 'express';
+import nodeCmd from 'node-cmd';
 
 const app: Express = express();
 const port: number = 3000;
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 app.post('/rgr', jsonParser, (req, res) => {
     if (req.body) {
         nodeCmd.get(req.body.command, (error, data, stderr) => {
-            nodeCmd.get('cd', (errorDir, dataDir, stderrDir) => {
+            nodeCmd.get('', (errorDir, dataDir, stderrDir) => {
                 res.json({
                     dir: dataDir,
                     result: data,
@@ -27,9 +27,6 @@ app.post('/rgr', jsonParser, (req, res) => {
         return res.status(401).json({message: `Doesn't get any data`});
     }
 });
-app.listen(port, err => {
-    if (err) {
-        return console.log(err);
-    }
-    return console.log(`Server is listening on port:${port}`)
+app.listen(port, () => {
+    console.log(`Server is listening on port:${port}`);
 });

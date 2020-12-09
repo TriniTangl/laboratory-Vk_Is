@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Records>
+  <User>
+    <Id>1592878380691</Id>
+    <Name>Dale</Name>
+    <City>Cametá</City>
+    <Email>velit.Aliquam.nisl@acrisus.edu</Email>
+  </User>
+  <User>
+    <Id>1594013458302</Id>
+    <Name>Finn</Name>
+    <City>Bellegem</City>
+    <Email>orci@cursus.edu</Email>
+  </User>
+  <User>
+    <Id>1587436635418</Id>
+    <Name>Victoria</Name>
+    <City>Nobressart</City>
+    <Email>Morbi.accumsan.laoreet@nec.co.uk</Email>
+  </User>
+  <User>
+    <Id>1607478826065</Id>
+    <Name>Johnny</Name>
+    <City>London</City>
+    <Email>louise9@cbyourself.com</Email>
+  </User>
+</Records>

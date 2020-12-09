@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<records>
+	<user>
+		<Id>100</Id>
+		<Name>Kadeem</Name>
+	</user>
+	<user>
+		<Id>101</Id>
+		<Name>Jayme</Name>
+	</user>
+	<user>
+		<Id>102</Id>
+		<Name>Emerson</Name>
+	</user>
+	<user>
+		<Id>103</Id>
+		<Name>Clio</Name>
+	</user>
+</records>
